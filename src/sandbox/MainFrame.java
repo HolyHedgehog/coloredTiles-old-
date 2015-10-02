@@ -21,17 +21,6 @@ public class MainFrame extends javax.swing.JFrame {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
-        switch (GameController.getCurrentDif()) {
-            case Settings.MIN_FIELD_SIZE:
-                Min_hard_radio.setSelected(true);
-                break;
-            case Settings.MEDIUM_FIELD_SIZE:
-                Med_hard_radio.setSelected(true);
-                break;
-            case Settings.MAX_FIELD_SIZE:
-                Max_hard_radio.setSelected(true);
-                break;
-        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -155,6 +144,7 @@ public class MainFrame extends javax.swing.JFrame {
         MenuPanel.add(jLabel1);
 
         levelGroup.add(Min_hard_radio);
+        Min_hard_radio.setSelected(true);
         Min_hard_radio.setText("10-10");
         MenuPanel.add(Min_hard_radio);
 
@@ -189,7 +179,6 @@ public class MainFrame extends javax.swing.JFrame {
         CellsPainting(controller.getCellsColors());
         buttonsDeactivate(controller.getCellsColors());
         printGameStatus(controller.getGameStatus());
-        controller.goodMove();
     }//GEN-LAST:event_yellowButtonActionPerformed
 
     private void redButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redButtonActionPerformed
@@ -198,7 +187,6 @@ public class MainFrame extends javax.swing.JFrame {
         CellsPainting(controller.getCellsColors());
         buttonsDeactivate(controller.getCellsColors());
         printGameStatus(controller.getGameStatus());
-        controller.goodMove();
     }//GEN-LAST:event_redButtonActionPerformed
 
     private void tealButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tealButtonActionPerformed
@@ -207,7 +195,6 @@ public class MainFrame extends javax.swing.JFrame {
         CellsPainting(controller.getCellsColors());
         buttonsDeactivate(controller.getCellsColors());
         printGameStatus(controller.getGameStatus());
-        controller.goodMove();
     }//GEN-LAST:event_tealButtonActionPerformed
 
     private void purpleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purpleButtonActionPerformed
@@ -216,7 +203,6 @@ public class MainFrame extends javax.swing.JFrame {
         CellsPainting(controller.getCellsColors());
         buttonsDeactivate(controller.getCellsColors());
         printGameStatus(controller.getGameStatus());
-        controller.goodMove();
     }//GEN-LAST:event_purpleButtonActionPerformed
 
     private void greenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greenButtonActionPerformed
@@ -225,7 +211,6 @@ public class MainFrame extends javax.swing.JFrame {
         CellsPainting(controller.getCellsColors());
         buttonsDeactivate(controller.getCellsColors());
         printGameStatus(controller.getGameStatus());
-        controller.goodMove();
     }//GEN-LAST:event_greenButtonActionPerformed
 
     private void blueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blueButtonActionPerformed
@@ -234,7 +219,6 @@ public class MainFrame extends javax.swing.JFrame {
         CellsPainting(controller.getCellsColors());
         buttonsDeactivate(controller.getCellsColors());
         printGameStatus(controller.getGameStatus());
-        controller.goodMove();
     }//GEN-LAST:event_blueButtonActionPerformed
 
     private void AboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AboutButtonActionPerformed
@@ -245,27 +229,27 @@ public class MainFrame extends javax.swing.JFrame {
     private void NewGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewGameButtonActionPerformed
         allButtonsActivated();
         if (Max_hard_radio.isSelected()) {
-            GameController.setCurrentDif(Settings.MAX_FIELD_SIZE);
+            GameController.setCurrentDif(Settings.max_hard.get());
         }
         if (Med_hard_radio.isSelected()) {
-            GameController.setCurrentDif(Settings.MEDIUM_FIELD_SIZE);
+            GameController.setCurrentDif(Settings.med_hard.get());
         }
         if (Min_hard_radio.isSelected()) {
-            GameController.setCurrentDif(Settings.MIN_FIELD_SIZE);
+            GameController.setCurrentDif(Settings.min_hard.get());
         }
         controller = new GameController();
+        allButtonsActivated();
         buttonsDeactivate(controller.getCellsColors());
         CellsPainting(controller.getCellsColors());
         printGameStatus(controller.getGameStatus());
-        allButtonsActivated();
     }//GEN-LAST:event_NewGameButtonActionPerformed
 
     private void CellsPainting(int[][] arg) {
 
         Graphics g = CellsPane.getGraphics();
-
-        for (int i = 0; i < controller.getCurrentDif(); i++) {
-            for (int j = 0; j < controller.getCurrentDif(); j++) {
+        int cellsSize = GameController.getCellssize();
+        for (int i = 0; i < GameController.getCurrentDif(); i++) {
+            for (int j = 0; j < GameController.getCurrentDif(); j++) {
                 switch (arg[i][j]) {
                     case 1:
                         g.setColor(Color.RED);
@@ -284,21 +268,6 @@ public class MainFrame extends javax.swing.JFrame {
                         break;
                     case 0:
                         g.setColor(Color.MAGENTA);
-                        break;
-                }
-                int cellsSize = 0;
-                switch (controller.getCurrentDif()) {
-                    case Settings.MAX_FIELD_SIZE:
-                        cellsSize = 10;
-                        break;
-                    case Settings.MEDIUM_FIELD_SIZE:
-                        cellsSize = 20;
-                        break;
-                    case Settings.MIN_FIELD_SIZE:
-                        cellsSize = 40;
-                        break;
-                    case 400:
-                        cellsSize = 1;
                         break;
                 }
                 g.fillRect(i * cellsSize, j * cellsSize, (i + 1) * cellsSize, (j + 1) * cellsSize);
@@ -398,7 +367,7 @@ public class MainFrame extends javax.swing.JFrame {
                 ChangeColorPanel.remove(purpleButton);
                 break;
         }
-        switch (Colors[controller.getCurrentDif() - 1][controller.getCurrentDif() - 1]) {
+        switch (Colors[GameController.getCurrentDif() - 1][GameController.getCurrentDif() - 1]) {
             case 1:
                 ChangeColorPanel.remove(redButton);
                 break;

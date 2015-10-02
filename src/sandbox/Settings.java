@@ -1,14 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sandbox;
 
-public interface Settings {
+public enum Settings {
 
-    public final int MAX_FIELD_SIZE = 40;
-    public final int MEDIUM_FIELD_SIZE = 20;
-    public final int MIN_FIELD_SIZE = 10;
+    min_hard {
+                @Override
+                public int get() {
+                    return 10;
+                }
+            },
+    med_hard {
+                @Override
+                public int get() {
+                    return 20;
+                }
+            },
+    max_hard {
+                @Override
+                public int get() {
+                    return 40;
+                }
+            };
 
+    public abstract int get();
 }

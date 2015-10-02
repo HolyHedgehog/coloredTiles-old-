@@ -5,9 +5,9 @@ public class SettingsFrame extends javax.swing.JFrame {
     public SettingsFrame() {
         initComponents();
         switch (GameController.getCurrentDif()){
-            case Settings.MIN_FIELD_SIZE: MinFieldRadio.setSelected(true);break;
-            case Settings.MEDIUM_FIELD_SIZE: MedFieldRadio.setSelected(true);break;
-            case Settings.MAX_FIELD_SIZE: MaxFieldRadio.setSelected(true);break;
+//            case Settings.MIN_FIELD_SIZE: MinFieldRadio.setSelected(true);break;
+//            case Settings.MEDIUM_FIELD_SIZE: MedFieldRadio.setSelected(true);break;
+//            case Settings.MAX_FIELD_SIZE: MaxFieldRadio.setSelected(true);break;
         }
     }
 
@@ -95,13 +95,13 @@ public class SettingsFrame extends javax.swing.JFrame {
 
     private void CloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseButtonActionPerformed
         if (MaxFieldRadio.isSelected()) {
-            GameController.setCurrentDif(Settings.MAX_FIELD_SIZE);
+//            GameController.setCurrentDif(Settings.MAX_FIELD_SIZE);
         }
         if (MedFieldRadio.isSelected()) {
-            GameController.setCurrentDif(Settings.MEDIUM_FIELD_SIZE);
+//            GameController.setCurrentDif(Settings.MEDIUM_FIELD_SIZE);
         }
         if (MinFieldRadio.isSelected()) {
-            GameController.setCurrentDif(Settings.MIN_FIELD_SIZE);
+//            GameController.setCurrentDif(Settings.MIN_FIELD_SIZE);
         }
         this.dispose();
        

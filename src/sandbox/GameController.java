@@ -13,11 +13,14 @@ import java.util.Random;
  */
 public class GameController {
 
-    private final int[][] CellsColors = new int[40][40];
-    private final int[][] CellsPlayer = new int[40][40];
-    private static int currentDif = Settings.MIN_FIELD_SIZE;
+    private final int[][] CellsColors;
+    private final int[][] CellsPlayer;
+    private static int currentDif = Settings.min_hard.get();
+    private static int cellssize;
 
     public GameController() {
+        CellsColors = new int [currentDif][currentDif];
+        CellsPlayer = new int [currentDif][currentDif];
         Random rand = new Random();
         for (int i = 0; i < currentDif; i++) {
             for (int j = 0; j < currentDif; j++) {
@@ -106,7 +109,6 @@ public class GameController {
     }
 
     public void MoveComp() {
-//        int a = genRandColor();
         int a = goodMove();
         boolean flag = true;
         while (flag) {
@@ -240,15 +242,17 @@ public class GameController {
 //        for (int i = 0; i < 6; i++) {
 //            System.out.print("   " + Count_colors_cells[i]);
 //        }
-        int max_val = Integer.MIN_VALUE, index_val = 0,sum=0;
+        int max_val = Integer.MIN_VALUE, index_val = 0, sum = 0;
         for (int i = 0; i < 6; i++) {
-            sum=sum+Count_colors_cells[i];
+            sum = sum + Count_colors_cells[i];
             if (Count_colors_cells[i] > max_val) {
                 max_val = Count_colors_cells[i];
                 index_val = i;
             }
         }
-        if (sum==0){index_val=genRandColor();}
+        if (sum == 0) {
+            index_val = genRandColor();
+        }
 //        System.out.println("returned int - "+index_val);
         return index_val;
     }
@@ -269,8 +273,15 @@ public class GameController {
 
     public static void setCurrentDif(int currentDif) {
         GameController.currentDif = currentDif;
+        if (currentDif==Settings.max_hard.get()){cellssize=10;}
+        if (currentDif==Settings.med_hard.get()){cellssize=20;}
+        if (currentDif==Settings.min_hard.get()){cellssize=40;}
     }
 
+    public static int getCellssize(){
+    return cellssize;
+    }    
+    
     public void dispose() {
         for (int i = 0; i < currentDif; i++) {
             for (int j = 0; j < currentDif; j++) {
